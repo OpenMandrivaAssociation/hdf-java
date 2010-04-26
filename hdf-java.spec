@@ -41,7 +41,10 @@ object-oriented form.
 
 export JAVA_HOME="%{java_home}"
 export COPT="%{optflags}"
-sed -i -e 's|LDOPT=-G|LDOPT=-g|g' -e 's|COPT=-G|COPT=-g|g' -e 's|LDOPT=-shared|"LDOPT=-g -shared"|g' -e 's|COPT=-shared|COPT="-shared  -fPIC"|g' configure*
+
+sed -i -e 's|LDOPT=-G|LDOPT=-g|g' -e 's|COPT=-G|COPT=-g|g' -e 's|LDOPT=-shared|LDOPT="-g -shared"|g' -e 's|COPT=-shared|COPT="-shared  -fPIC"|g' -e 's|x86_64-pc-linux|x86_64-*-linux|g' -e 's|x86_64-pc|x86_64-*|g' configure*
+#(tpg) make it work
+sed -i -e 's|x86_64-pc|x86_64-*|g' Config/config.sub
 find . -name 'Makefile.in' | xargs sed -i -e 's|CFLAGS =|CFLAGS +=|g'
 find . -name 'Makefile.in' | xargs sed -i -e 's|LDOPT=|LDOPT+=|g'
 find . -name 'Makefile.in' | xargs sed -i -e 's|COPT=|COPT+=|g'
