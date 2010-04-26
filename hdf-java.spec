@@ -1,9 +1,8 @@
-
 Summary:	Java HDF5 Object Package
 Name:		hdf-java
 Version:	2.6
 Release:	%mkrel 1
-License:	GPL
+License:	BSD-like
 Group:		Development/Java
 Url:		http://www.hdfgroup.org/
 Source0:	http://www.hdfgroup.org/ftp/HDF5/hdf-java/src/hdf-java-2.6-src.tar.bz2
@@ -16,10 +15,13 @@ BuildRequires:	java-devel-openjdk
 BuildRequires:	classpath-devel
 BuildRequires:	hdf5-devel
 BuildRequires:	HDF-devel
+BuildRequires:	HDF
 BuildRequires:	netcdf-devel
 BuildRequires:	libjpeg-devel
 BuildRequires:	zlib-devel
 BuildConflicts:	libgcj-devel
+Requires:	HDF
+Requires:	libhdf5
 BuildRoot:	%{_tmppath}/%{name}-%{version}-buildroot
 
 %description
@@ -52,7 +54,7 @@ autoreconf -fiv
 	--with-libz=yes,%{_libdir}  \
 	--with-libjpeg=yes,%{_libdir}   \
 	--with-hdf5=yes,%{_libdir} \
-	--without-hdf4
+	--with-hdf4=yes,%{_libdir}
 
 %make
 
@@ -60,15 +62,15 @@ autoreconf -fiv
 [ "%{buildroot}" != "/" ] && rm -rf %{buildroot}
 
 %makeinstall_std
+rm -rf %{buildroot}%{_docdir}/hdf-java
 
 %clean
 [ "%{buildroot}" != "/" ] && rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root)
-%doc Readme.txt
+%doc Readme.txt docs/*
 %{_bindir}/hdfview.sh
 %{_datadir}/java/*.jar
 %{_datadir}/java/ext/*.jar
 %{_datadir}/java/*.so
-%{_docdir}/hdf-java
