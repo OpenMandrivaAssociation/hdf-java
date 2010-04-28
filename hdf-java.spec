@@ -59,7 +59,7 @@ autoreconf -fiv
 	--with-hdf5=yes,%{_libdir} \
 	--with-hdf4=yes,%{_libdir}
 
-%make
+%make -j1
 
 %install
 [ "%{buildroot}" != "/" ] && rm -rf %{buildroot}
