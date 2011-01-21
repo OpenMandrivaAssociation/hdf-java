@@ -1,11 +1,12 @@
 Summary:	Java HDF5 Object Package
 Name:		hdf-java
-Version:	2.6
-Release:	%mkrel 3
+Version:	2.6.1
+Release:	%mkrel 1
 License:	BSD-like
 Group:		Development/Java
 Url:		http://www.hdfgroup.org/
-Source0:	http://www.hdfgroup.org/ftp/HDF5/hdf-java/src/hdf-java-2.6-src.tar.bz2
+# http://www.hdfgroup.org/ftp/HDF5/hdf-java/src/hdf-java-2.6.1-src.tar
+Source0:	hdf-java-2.6.1-src.tar.xz
 Patch0:		hdf-java-2.6-not-writable-fix.patch
 Patch1:		hdf-java-2.6-use-shared-libraries.patch
 Patch2:		hdf-java-2.6-optflags.patch
