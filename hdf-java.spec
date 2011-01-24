@@ -1,7 +1,7 @@
 Summary:	Java HDF5 Object Package
 Name:		hdf-java
 Version:	2.6.1
-Release:	%mkrel 1
+Release:	%mkrel 2
 License:	BSD-like
 Group:		Development/Java
 Url:		http://www.hdfgroup.org/
@@ -76,6 +76,11 @@ autoreconf -fiv
 %makeinstall_std
 rm -rf %{buildroot}%{_docdir}/hdf-java
 
+# should be another jni specific directory, but only hdf-java install
+# .so files there...
+mkdir -p %{buildroot}%{_libdir}
+mv -f %{_buildroot}%{_datadir}/*.so %{buildroot}%{_libdir}
+
 %clean
 [ "%{buildroot}" != "/" ] && rm -rf %{buildroot}
 
@@ -85,4 +90,4 @@ rm -rf %{buildroot}%{_docdir}/hdf-java
 %{_bindir}/hdfview.sh
 %{_datadir}/java/*.jar
 %{_datadir}/java/ext/*.jar
-%{_datadir}/java/*.so
+%{_libdir}/*.so
