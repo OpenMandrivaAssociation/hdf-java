@@ -79,7 +79,7 @@ rm -rf %{buildroot}%{_docdir}/hdf-java
 # should be another jni specific directory, but only hdf-java install
 # .so files there...
 mkdir -p %{buildroot}%{_libdir}
-mv -f %{_buildroot}%{_datadir}/*.so %{buildroot}%{_libdir}
+mv -f %{buildroot}%{_javadir}/*.so %{buildroot}%{_libdir}
 
 %clean
 [ "%{buildroot}" != "/" ] && rm -rf %{buildroot}
@@ -88,6 +88,6 @@ mv -f %{_buildroot}%{_datadir}/*.so %{buildroot}%{_libdir}
 %defattr(-,root,root)
 %doc Readme.txt docs/*
 %{_bindir}/hdfview.sh
-%{_datadir}/java/*.jar
-%{_datadir}/java/ext/*.jar
+%{_javadir}/*.jar
+%{_javadir}/ext/*.jar
 %{_libdir}/*.so
