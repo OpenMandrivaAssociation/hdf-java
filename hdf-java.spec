@@ -1,7 +1,7 @@
 Summary:	Java HDF5 Object Package
 Name:		hdf-java
 Version:	2.6.1
-Release:	%mkrel 2
+Release:	%mkrel 3
 License:	BSD-like
 Group:		Development/Java
 Url:		http://www.hdfgroup.org/
