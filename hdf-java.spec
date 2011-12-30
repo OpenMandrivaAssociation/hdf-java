@@ -1,7 +1,7 @@
 Summary:	Java HDF5 Object Package
 Name:		hdf-java
 Version:	2.6.1
-Release:	%mkrel 3
+Release:	%mkrel 4
 License:	BSD-like
 Group:		Development/Java
 Url:		http://www.hdfgroup.org/
@@ -14,14 +14,14 @@ Patch3:		hdf-java-2.6-installdirs.patch
 BuildRequires:  java-rpmbuild
 BuildRequires:	java-devel-openjdk
 BuildRequires:	classpath-devel
-BuildRequires:	hdf5-devel
+BuildRequires:	hdf-util
 BuildRequires:	HDF-devel
-BuildRequires:	HDF
+BuildRequires:	hdf5-devel
 BuildRequires:	netcdf-devel
 BuildRequires:	libjpeg-devel
 BuildRequires:	zlib-devel
 BuildConflicts:	libgcj-devel
-Requires:	HDF
+Requires:	hdf-util
 Requires:	libhdf5
 BuildRoot:	%{_tmppath}/%{name}-%{version}-buildroot
 
