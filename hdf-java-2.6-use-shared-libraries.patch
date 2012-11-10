@@ -1,0 +1,175 @@
+diff -Naur hdf-java/configure.in hdf-java.tpg/configure.in
+--- hdf-java/configure.in	2009-11-09 21:24:50.000000000 +0000
++++ hdf-java.tpg/configure.in	2010-01-31 22:28:44.000000000 +0000
+@@ -165,30 +165,12 @@
+ AC_SUBST(ZLIB) ZLIB=""
+ AC_ARG_WITH(libz,[  --with-libz=LIB     Path to the gzip library (required if not in default path)],,)
+ 
+-case "$withval" in
+-  yes)
+-      ZLIB=""
+-	HAVE_ZLIB="no"
+-    ;;
+-  no)
+-      ZLIB=""
+-	HAVE_ZLIB="suppressed"
+-    ;;
+-  *)
+-    if test -n "$withval" ; then
+-        z_lib="`echo $withval |cut -f2 -d, -s`"
+-	ZLIB=$z_lib"/libz."$LLEXT
+-	HAVE_ZLIB="yes"
+-    else
+-      ZLIB=""
+-	HAVE_ZLIB="no"
+-    fi
+-;;
+-esac
++ZLIB=" -lz "
+ if test -n "$ZLIB"; then
+ 	LIBS="$LIBS $ZLIB"
+ 	HAVE_ZLIB="yes"
+ fi
++
+ AC_MSG_RESULT([$HAVE_ZLIB])
+ if test $HAVE_ZLIB = "yes"; then
+     	AC_MSG_RESULT([zlib found: $ZLIB]);
+@@ -200,25 +182,8 @@
+ AC_SUBST(JPEGLIB) JPEGLIB=""
+ AC_ARG_WITH(libjpeg,[  --with-libjpeg=LIB     Path to the jpeg library (required if not in default path)],,)
+ 
+-case "$withval" in
+-  yes)
+-	HAVE_JPEG="no"
+-    ;;
+-  no)
+-      JPEGLIB=""
+-	HAVE_JPEG="suppressed"
+-    ;;
+-  *)
+-    if test -n "$withval" ; then
+-        jpeg_lib="`echo $withval |cut -f2 -d, -s`"
+-	JPEGLIB=$jpeg_lib"/libjpeg."$LLEXT
+-    	#AC_MSG_RESULT([jpeg found: $JPEGLIB]);
+-	HAVE_JPEG="yes"
+-    else
+-	HAVE_JPEG="no"
+-    fi
+-;;
+-esac
++JPEGLIB=" -ljpeg"
++
+ if test -n "$JPEGLIB"; then
+ 	LIBS="$LIBS $JPEGLIB"
+ 	HAVE_JPEG="yes"
+@@ -274,37 +239,11 @@
+ AC_SUBST(HDF4LIB) HDF4LIB=""
+ AC_ARG_WITH(hdf4,[  --with-hdf4=LIB     Path to the hdf library (required if not in default path)],,)
+ 
+-case "$withval" in
+-  yes)
+-    #AC_MSG_ERROR(HDF4 library needed for compilation.)
+-      HDF4LIB=""
+-	HAVE_HDF4="no"
+-    ;;
+-  no)
+-      HDF4LIB=""
+-	HAVE_HDF4="suppressed"
+-    ;;
+-  *)
+-	if test -n "$withval" ; then
+-	    hdf4_inc="`echo $withval |cut -f1 -d,`"
+-	    if test -n "$hdf4_inc"; then
+-	      HDF4INC="$hdf4_inc"
+-	    fi
+-	    hdf4_lib="`echo $withval |cut -f2 -d, -s`"
+-	    if test -n "$hdf4_lib"; then
+-		HDF4LIB=$hdf4_lib
+-	    fi
+-	    HAVE_HDF4="yes"
+-	else
+-	      HDF4LIB=""
+-	    HAVE_HDF4="no"
+-	fi
+-	;;
+-esac
+-if test -n "$HDF4LIB"; then
+-	LIBS="$HDF4LIB/libdf.$LLEXT $HDF4LIB/libmfhdf.$LLEXT $LIBS"
+-	HAVE_HDF4="yes"
+-fi
++HDF4LIB=" -lmfhdf -ldf "
++LIBS=" -lmfhdf -ldf $LIBS"
++HDF4INC="/usr/include"
++HAVE_HDF4="yes"
++
+ AC_MSG_RESULT([$HAVE_HDF4])
+ if test $HAVE_HDF4 = "yes"; then
+     	AC_MSG_RESULT([HDF4 found: $HDF4LIB]);
+@@ -351,38 +290,11 @@
+ AC_SUBST(HDF5LIB) HDF5LIB=""
+ AC_ARG_WITH(hdf5,[  --with-hdf5=LIB     Path to the hdf5 library (required if not in default path)],,)
+ 
+-case "$withval" in
+-  yes)
+-      HDF5LIB=""
+-	HAVE_HDF5="no"
+-    ;;
+-  no)
+-      HDF5LIB=""
+-	HAVE_HDF5="suppressed"
+-    ;;
+-  *)
+-	if test -n "$withval" ; then
+-	    hdf5_lib="`echo $withval |cut -f2 -d, -s`"
+-		HDF5LIB=$hdf5_lib"/libhdf.$LLEXT"
+-	    hdf5_inc="`echo $withval |cut -f1 -d,`"
+-	    if test -n "$hdf5_inc"; then
+-	      HDF5INC="$hdf5_inc"
+-	    fi
+-	    hdf5_lib="`echo $withval |cut -f2 -d, -s`"
+-	    if test -n "$hdf5_lib"; then
+-		HDF5LIB=$hdf5_lib
+-	    fi
+-	    HAVE_HDF5="yes"
+-	else
+-	      HDF5LIB=""
+-	    HAVE_HDF5="no"
+-	fi
+-	;;
+-esac
+-if test -n "$HDF5LIB"; then
+-	LIBS="$HDF5LIB/libhdf5.$LLEXT $LIBS"
+-	HAVE_HDF5="yes"
+-fi
++HDF5LIB=" -lhdf5 "
++LIBS=" -lhdf5 $LIBS"
++HDF5INC="/usr/include/"
++HAVE_HDF5="yes"
++
+ AC_MSG_RESULT([$HAVE_HDF5])
+ if test $HAVE_HDF5 = "yes"; then
+     	AC_MSG_RESULT([HDF5 found: $HDF5LIB]);
+diff -Naur hdf-java/native/hdf5lib/Makefile.in hdf-java.tpg/native/hdf5lib/Makefile.in
+--- hdf-java/native/hdf5lib/Makefile.in	2009-11-09 21:24:46.000000000 +0000
++++ hdf-java.tpg/native/hdf5lib/Makefile.in	2010-01-31 22:28:44.000000000 +0000
+@@ -33,7 +33,7 @@
+ 
+ CFLAGS = -DH5_USE_16_API -D_FILE_OFFSET_BITS=64 $(DEFS) -I. -I$(HDF5INC) -I$(JAVAINC1) -I$(JAVAINC2)
+ 
+-LIBS =  $(HDF5LIB)/libhdf5.$(LLEXT) $(ZLIB) $(SZLIB) -lm
++LIBS =  $(HDF5LIB) $(ZLIB) $(SZLIB) -lm
+ 
+ # Macro def: object filename used
+ OBJECTS =  exceptionImp.o h5Constants.o h5Imp.o h5aImp.o h5dImp.o h5fImp.o h5gImp.o h5iImp.o h5pImp.o h5rImp.o h5sImp.o h5tImp.o nativeData.o h5util.o h5zImp.o
+diff -Naur hdf-java/native/hdflib/Makefile.in hdf-java.tpg/native/hdflib/Makefile.in
+--- hdf-java/native/hdflib/Makefile.in	2009-11-09 21:24:45.000000000 +0000
++++ hdf-java.tpg/native/hdflib/Makefile.in	2010-01-31 22:28:44.000000000 +0000
+@@ -37,7 +37,7 @@
+ CFLAGS = $(DEFS) -I. -I$(JAVAINC1) -I$(JAVAINC2) -I$(HDFINC)
+ 
+ # Be sure to add -lbsd if compiling in a SYSV environment
+-LIBS =  $(HDFLIB)/libmfhdf.$(LLEXT) $(HDFLIB)/libdf.$(LLEXT) $(SZLIB) $(ZLIB) $(JPEGLIB) -lm
++LIBS =  -lmfhdf -ldf $(SZLIB) $(ZLIB) $(JPEGLIB) -lm
+ 
+ # Macro def: object filename used
+ OBJECTS =  hdfstructsutil.o \

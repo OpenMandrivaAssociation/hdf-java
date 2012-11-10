@@ -1,0 +1,68 @@
+diff -Naur hdf-java/configure hdf-java.tpg/configure
+--- hdf-java/configure	2009-11-09 21:24:50.000000000 +0000
++++ hdf-java.tpg/configure	2010-01-31 22:31:38.000000000 +0000
+@@ -4418,15 +4418,16 @@
+ echo "${ECHO_T}$ac_cv_lib_JH45INST" >&6
+ fi
+ if test $JH45INST_FOUND -eq 1; then
++	mkdir -p $JH45INST
+ 	if test -z "$JH45INST" ; then
+ 		JH45INST=$ac_cv_lib_JH45INST;
+ 	fi
+ 	if test \( ! -d "$JH45INST" \); then
+ 		JH45INST_FOUND=0
+ 	fi
+-	if test \( ! -w "$JH45INST" \); then
+-		{ { echo "$as_me:$LINENO: error:  $JAVINST : not writable " >&5
+-echo "$as_me: error:  $JAVINST : not writable " >&2;}
++	if test \(  -w "$JH45INST" \); then
++		{ { echo "$as_me:$LINENO: error:  $JH45INST : not writable " >&5
++echo "$as_me: error:  $JH45INST : not writable " >&2;}
+    { (exit 1); exit 1; }; }
+ 		JH45INST_FOUND=0
+ 	fi
+@@ -4438,9 +4439,9 @@
+ 	if test \( ! -d "$JH45INST" \); then
+ 		JH45INST_FOUND=0
+ 	fi
+-	if test \( ! -w "$JH45INST" \); then
+-		{ { echo "$as_me:$LINENO: error:  $JAVINST : not writable " >&5
+-echo "$as_me: error:  $JAVINST : not writable " >&2;}
++	if test \(  -w "$JH45INST" \); then
++		{ { echo "$as_me:$LINENO: error:  $JH45INST : not writable " >&5
++echo "$as_me: error:  $JH45INST : not writable " >&2;}
+    { (exit 1); exit 1; }; }
+ 		JH45INST_FOUND=0
+ 	fi
+diff -Naur hdf-java/configure.in hdf-java.tpg/configure.in
+--- hdf-java/configure.in	2009-11-09 21:24:50.000000000 +0000
++++ hdf-java.tpg/configure.in	2010-01-31 22:32:16.000000000 +0000
+@@ -626,14 +626,17 @@
+ AC_CACHE_CHECK("JH45 install directory",ac_cv_lib_JH45INST,JH45INST_FOUND=0)
+ fi
+ if test $JH45INST_FOUND -eq 1; then
++	mkdir -p $JH45INST
+ 	if test -z "$JH45INST" ; then
+ 		JH45INST=$ac_cv_lib_JH45INST;
+ 	fi
++
+ 	if test \( ! -d "$JH45INST" \); then
+ 		JH45INST_FOUND=0
+ 	fi
+-	if test \( ! -w "$JH45INST" \); then
+-		AC_MSG_ERROR( [ $JAVINST : not writable ])
++
++	if test \(  -w "$JH45INST" \); then
++		AC_MSG_ERROR( [ $JH45INST : not writable ])
+ 		JH45INST_FOUND=0
+ 	fi
+ fi
+@@ -644,7 +647,7 @@
+ 	if test \( ! -d "$JH45INST" \); then
+ 		JH45INST_FOUND=0
+ 	fi
+-	if test \( ! -w "$JH45INST" \); then
++	if test \(  -w "$JH45INST" \); then
+ 		AC_MSG_ERROR( [ $JAVINST : not writable ])
+ 		JH45INST_FOUND=0
+ 	fi

@@ -1,0 +1,24 @@
+diff -Naur hdf-java/native/hdf5lib/Makefile.in hdf-java.tpg/native/hdf5lib/Makefile.in
+--- hdf-java/native/hdf5lib/Makefile.in	2009-11-09 21:24:46.000000000 +0000
++++ hdf-java.tpg/native/hdf5lib/Makefile.in	2010-01-31 22:55:20.000000000 +0000
+@@ -45,7 +45,7 @@
+ 
+ libjhdf5: $(OBJECTS)
+ 	-mkdir -p $(LIBDIR);
+-	$(LD) $(LDOPT) -o $(LIBDIR)/libjhdf5.$(JSLEXT) $(LDOPT2) $(OBJECTS) $(LIBS)
++	$(LD) $(LDOPT) $(COPT) -o $(LIBDIR)/libjhdf5.$(JSLEXT) $(LDOPT2) $(OBJECTS) $(LIBS)
+ 
+ clean:
+ 	$(RM) -f *.o so_locations $(LIBDIR)/libjhdf5.$(JSLEXT)
+diff -Naur hdf-java/native/hdflib/Makefile.in hdf-java.tpg/native/hdflib/Makefile.in
+--- hdf-java/native/hdflib/Makefile.in	2009-11-09 21:24:45.000000000 +0000
++++ hdf-java.tpg/native/hdflib/Makefile.in	2010-01-31 22:54:30.000000000 +0000
+@@ -56,7 +56,7 @@
+ 
+ libjhdf: $(OBJECTS) 
+ 	-mkdir -p $(LIBDIR);
+-	$(LD) $(LDOPT) -o $(LIBDIR)/libjhdf.$(JSLEXT) $(LDOPT2) $(OBJECTS) $(LIBS)
++	$(LD) $(LDOPT) $(COPT) -o $(LIBDIR)/libjhdf.$(JSLEXT) $(LDOPT2) $(OBJECTS) $(LIBS)
+ 
+ clean:
+ 	$(RM) -f *.o so_locations $(LIBDIR)/libjhdf.$(JSLEXT)
