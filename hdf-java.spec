@@ -1,7 +1,7 @@
 Summary:	Java HDF5 Object Package
 Name:		hdf-java
 Version:	2.6.1
-Release:	%mkrel 4
+Release:	5
 License:	BSD-like
 Group:		Development/Java
 Url:		http://www.hdfgroup.org/
@@ -11,19 +11,18 @@ Patch0:		hdf-java-2.6-not-writable-fix.patch
 Patch1:		hdf-java-2.6-use-shared-libraries.patch
 Patch2:		hdf-java-2.6-optflags.patch
 Patch3:		hdf-java-2.6-installdirs.patch
-BuildRequires:  java-rpmbuild
+BuildRequires:	java-rpmbuild
 BuildRequires:	java-devel-openjdk
 BuildRequires:	classpath-devel
 BuildRequires:	hdf-util
 BuildRequires:	HDF-devel
 BuildRequires:	hdf5-devel
 BuildRequires:	netcdf-devel
-BuildRequires:	libjpeg-devel
+BuildRequires:	jpeg-devel
 BuildRequires:	zlib-devel
 BuildConflicts:	libgcj-devel
-Requires:	hdf-util
+Requires:	HDF-util
 Requires:	libhdf5
-BuildRoot:	%{_tmppath}/%{name}-%{version}-buildroot
 
 %description
 This Java package implements HDF5 data objects in an 
@@ -71,7 +70,6 @@ autoreconf -fiv
 %make -j1
 
 %install
-[ "%{buildroot}" != "/" ] && rm -rf %{buildroot}
 
 %makeinstall_std
 rm -rf %{buildroot}%{_docdir}/hdf-java
@@ -81,11 +79,7 @@ rm -rf %{buildroot}%{_docdir}/hdf-java
 mkdir -p %{buildroot}%{_libdir}
 mv -f %{buildroot}%{_javadir}/*.so %{buildroot}%{_libdir}
 
-%clean
-[ "%{buildroot}" != "/" ] && rm -rf %{buildroot}
-
 %files
-%defattr(-,root,root)
 %doc Readme.txt docs/*
 %{_bindir}/hdfview.sh
 %{_javadir}/*.jar
