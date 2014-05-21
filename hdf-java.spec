@@ -15,7 +15,7 @@ BuildRequires:	java-rpmbuild
 BuildRequires:	java-devel-openjdk
 BuildRequires:	classpath-devel
 BuildRequires:	hdf-util
-BuildRequires:	HDF-devel
+BuildRequires:	hdf-devel
 BuildRequires:	hdf5-devel
 BuildRequires:	netcdf-devel
 BuildRequires:	jpeg-devel
