@@ -1,7 +1,7 @@
 Summary:	Java HDF5 Object Package
 Name:		hdf-java
 Version:	2.6.1
-Release:	5
+Release:	6
 License:	BSD-like
 Group:		Development/Java
 Url:		http://www.hdfgroup.org/
@@ -21,8 +21,8 @@ BuildRequires:	netcdf-devel
 BuildRequires:	jpeg-devel
 BuildRequires:	zlib-devel
 BuildConflicts:	libgcj-devel
-Requires:	HDF-util
-Requires:	libhdf5
+Requires:	hdf-util
+Requires:	hdf5
 
 %description
 This Java package implements HDF5 data objects in an 
