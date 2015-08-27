@@ -1,7 +1,7 @@
 Summary:	Java HDF5 Object Package
 Name:		hdf-java
 Version:	2.6.1
-Release:	8
+Release:	9
 License:	BSD-like
 Group:		Development/Java
 Url:		http://www.hdfgroup.org/
@@ -38,7 +38,7 @@ object-oriented form.
 %build
 %define _disable_ld_no_undefined 1
 %define _disable_ld_as_needed 1
-
+%define _disable_lto 1
 export JAVA_HOME="%{java_home}"
 export COPT="%{optflags}"
 
