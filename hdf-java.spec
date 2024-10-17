@@ -4,7 +4,7 @@ Version:	2.6.1
 Release:	9
 License:	BSD-like
 Group:		Development/Java
-Url:		http://www.hdfgroup.org/
+Url:		https://www.hdfgroup.org/
 # http://www.hdfgroup.org/ftp/HDF5/hdf-java/src/hdf-java-2.6.1-src.tar
 Source0:	hdf-java-2.6.1-src.tar.xz
 Patch0:		hdf-java-2.6-not-writable-fix.patch
