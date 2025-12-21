@@ -11,6 +11,11 @@ Patch0:		hdf-java-2.6-not-writable-fix.patch
 Patch1:		hdf-java-2.6-use-shared-libraries.patch
 Patch2:		hdf-java-2.6-optflags.patch
 Patch3:		hdf-java-2.6-installdirs.patch
+BuildRequires:	autoconf
+BuildRequires:	automake
+BuildRequires:	libtool-base
+BuildRequires:	slibtool
+BuildRequires:	make
 BuildRequires:	java-rpmbuild
 BuildRequires:	java-devel-openjdk
 BuildRequires:	classpath-devel
